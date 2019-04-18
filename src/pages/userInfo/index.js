@@ -1,51 +1,24 @@
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { View, Text,Button } from '@tarojs/components'
-import '../index/index.less'
+import LifeCycle from '../../components/LifeCycle'
 
-class UserInfo extends Component {
+class UserInfo extends LifeCycle {
+
+  componentName = 'UserInfo'
 
   config = {
     navigationBarTitleText: 'userInfo'
   }
 
-  log = (value) => {
-    console.log('UserInfo', value)
-  }
-
-  constructor(props) {
-    super(props)
-    
-    this.log('constructor')
-  }
-
-  componentWillMount () {
-    this.log('componentWillMount');
-  }
-
-  componentDidMount () {
-    this.log('componentDidMount')
-  }
-
-  componentWillReceiveProps () {
-    this.log('componentWillReceiveProps')
-  }
-
-  componentWillUnmount () {
-    this.log('componentWillUnmount')
-  }
-
-  componentDidShow () {
-    this.log('componentDidShow')
-  }
-
-  componentDidHide () {
-    this.log('componentDidHide')
-  }
-
   onBack() {
-    Taro.redirectTo({
-      url: '/pages/index/index'
-    })
+    // Taro.navigateTo({
+    //   url: '/pages/index/index'
+    // })
+
+    const pages = Taro.getCurrentPages()
+    const prePage = pages[pages.length - 2] // 上一个页面的实例
+    prePage.data.add() // 调用上个页面的方法
+    Taro.navigateBack()
   }
 
   render () {

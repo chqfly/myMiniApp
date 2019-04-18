@@ -31,8 +31,8 @@ export function asyncAdd () {
   return dispatch => {
     dispatch(showLoading())
     setTimeout(() => {
-      dispatch(add())
       dispatch(hideLoading())
+      dispatch(add())
     }, 2000)
   }
 }
